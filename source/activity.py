@@ -19,7 +19,9 @@ def getactivity(start_date , end_date) :
     CLIENT_SECRET='636c18786967602847f7396da3456f41'
 
     def daterange(start_date, end_date):
-        for n in range(int ((end_date - start_date).days)):
+        start = start_date
+        end = end_date
+        for n in range(int ((end - start).days)):
             yield start_date + timedelta(n)
     
     #autorization proccess
@@ -158,3 +160,8 @@ def getactivity(start_date , end_date) :
     
     #dictornary to csv 
     df.to_csv("source/data/activities.csv",index=False)
+
+
+start_date = datetime.datetime(2022,2,3).date()
+end_date = datetime.datetime(2022,3,3).date()
+getactivity(start_date , end_date)

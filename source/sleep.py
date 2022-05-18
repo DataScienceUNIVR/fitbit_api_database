@@ -19,8 +19,10 @@ def getsleep(start_date , end_date) :
         CLIENT_SECRET='636c18786967602847f7396da3456f41'
 
         def daterange(start_date, end_date):
-            for n in range(int ((end_date - start_date).days)):
-                yield start_date + timedelta(n)
+            start = start_date
+            end = end_date
+            for n in range(int ((end - start).days)):
+                yield start + timedelta(n)
 
         #autorization proccess
         server=Oauth2.OAuth2Server(CLIENT_ID, CLIENT_SECRET)
