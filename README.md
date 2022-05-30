@@ -65,5 +65,16 @@ unfortunately the sleep score is not obtainable through the fitbit API and there
 
 to get the csv you need to log in to the official fitbit website, and access your personal data. At this point it is necessary to download all the user's history and under the sleep folder there is the csv containing the sleep score.
 
+### user table 
 ![image](https://user-images.githubusercontent.com/70893659/169277107-45bd2563-f485-4fbf-8758-dc0d17d11387.png)
+
+# how to download the sleep score
+log in to the official fitbit website : https://www.fitbit.com/global/it/home
+click on the top right and enter the user settings, then select the data export item :
+![asdasdCattura](https://user-images.githubusercontent.com/70893659/171038132-6a17f20c-ac99-4787-9549-b7ed84a92290.PNG)
+click on request data.
+The data will be sent to the email with which you logged in to the fitbit account through a zip package.
+(MyFitbitData\user_name\Sleep\sleep_score.csv)
+Extract the data where you want and pass the path of the csv containing the sleep score into the application
+
 
