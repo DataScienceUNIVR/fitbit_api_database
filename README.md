@@ -18,8 +18,8 @@ Once the application is created, OAuth 2.0 Client ID and Client Secret will be p
 
 ![auth](https://user-images.githubusercontent.com/70893659/169270963-3146ed59-5c5a-481e-af7f-120eb464e953.png)
 
-# how programs work 
-Atart the main.py program and enter the client id and the client secret, then you will be asked to enter the start date and the end date of the period for which you want to save the data (maximum recommended interval one year).
+# How programs work 
+Start the main.py program and enter the client id and the client secret, then you will be asked to enter the start date and the end date of the period for which you want to save the data (maximum interval is 1095 days , recommended interval one year).
 After starting, the program will download all available data and insert them into the database
 
 # Database
