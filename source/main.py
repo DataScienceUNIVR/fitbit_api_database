@@ -5,17 +5,25 @@ import mysqlx
 import pandas as pd
 import mysql.connector as mysql
 from mysql.connector import Error
- 
+import credentials
+from credentials import getCredentials
 
-#start date 
-day_inizio = input("inserisci il giorno di inizio : ")
-month_inizio = input("inserisci il mese di inizio : ")
-year_inizio = input("inserisci il anno di inizio : ")
+#path to the csv file of the sleep score
+path = "C:\\Users\\aless\\OneDrive\\Desktop\\Tesi_fitbit\\MyFitbitData\\Massimo\\Sleep\\sleep_score.csv"
+path = input("insert th path to the sleep score csv : ")
+print(path)
+
+#get credentials from the user
+getCredentials()
+#start date insert the start day
+day_inizio = input("insert the start day : ")
+month_inizio = input("insert the start month : ")
+year_inizio = input("insert the start year : ")
 
 #end date 
-day_fine = input("inserisci il giorno di fine : ")
-month_fine = input("inserisci il mese di fine : ")
-year_fine = input("inserisci il anno di fine : ")
+day_fine = input("insert the end day : ")
+month_fine = input("insert the end month : ")
+year_fine = input("insert the end year : ")
 
 #define start and end date
 start_date = datetime.datetime(int(year_inizio),int(month_inizio),int(day_inizio)).date()
@@ -172,46 +180,47 @@ for i in range(len(date_ranges) - 1 ):
 path = "C:\\Users\\aless\\OneDrive\\Desktop\\Tesi_fitbit\\MyFitbitData\\Massimo\\Sleep\\sleep_score.csv"
 print(path)
 
-#open the csv 
-with open(path, 'r') as file:
-    reader = csv.reader(file)
-    
-    for row in reader:
-            # row variable is a list that represents a row in csv
-            print(row)
-            list_row = row
-            my_list= list_user + list_row
+if path != "" :
+    #open the csv 
+    with open(path, 'r') as file:
+        reader = csv.reader(file)
+        
+        for row in reader:
+                # row variable is a list that represents a row in csv
+                print(row)
+                list_row = row
+                my_list= list_user + list_row
 
-            #database connection
-            try:
-                conn = mysql.connect(host='localhost', database='fitbit', user='root', password='Progetto.fitbit22')
-                if conn.is_connected():
-                    cursor = conn.cursor()
-                    cursor.execute("select database();")
-                    record = cursor.fetchone()
-                    print("You're connected to database: ", record)
+                #database connection
+                try:
+                    conn = mysql.connect(host='localhost', database='fitbit', user='root', password='Progetto.fitbit22')
+                    if conn.is_connected():
+                        cursor = conn.cursor()
+                        cursor.execute("select database();")
+                        record = cursor.fetchone()
+                        print("You're connected to database: ", record)
 
-                    cursor.execute("""CREATE TABLE IF NOT EXISTS `fitbit`.`sleep_score` (
-                                    `id_sleep_score` INT NOT NULL AUTO_INCREMENT,
-                                    `user_id` VARCHAR(45) NULL,
-                                    `user_name` VARCHAR(45) NULL,
-                                    `user_age` VARCHAR(45) NULL,
-                                    `sleep_log_entry_id` DOUBLE NULL DEFAULT NULL,
-                                    `timestamp` VARCHAR(45) NULL,
-                                    `overall_score` INT NULL,
-                                    `composition_score` INT NULL,
-                                    `revitalization_score` INT NULL,
-                                    `duration_score` INT NULL,
-                                    `deep_sleep_in_minutes` INT NULL,
-                                    `resting_heart_rate` INT NULL,
-                                    `restlessness` INT NULL,
-                                    PRIMARY KEY (`id_sleep_score`));
-                                    """)
+                        cursor.execute("""CREATE TABLE IF NOT EXISTS `fitbit`.`sleep_score` (
+                                        `id_sleep_score` INT NOT NULL AUTO_INCREMENT,
+                                        `user_id` VARCHAR(45) NULL,
+                                        `user_name` VARCHAR(45) NULL,
+                                        `user_age` VARCHAR(45) NULL,
+                                        `sleep_log_entry_id` DOUBLE NULL DEFAULT NULL,
+                                        `timestamp` VARCHAR(45) NULL,
+                                        `overall_score` INT NULL,
+                                        `composition_score` INT NULL,
+                                        `revitalization_score` INT NULL,
+                                        `duration_score` INT NULL,
+                                        `deep_sleep_in_minutes` INT NULL,
+                                        `resting_heart_rate` INT NULL,
+                                        `restlessness` INT NULL,
+                                        PRIMARY KEY (`id_sleep_score`));
+                                        """)
 
 
-                    #eseguo la query per inserire la nuova riga nel database
-                    cursor.execute('INSERT INTO fitbit.sleep_score(user_id, user_name, user_age, sleep_log_entry_id, timestamp, overall_score, composition_score, revitalization_score, duration_score, deep_sleep_in_minutes, resting_heart_rate, restlessness)''VALUES(%s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s)',my_list)
-                    conn.commit()     
-                    
-            except Error as e:
-                        print("Error while connecting to MySQL", e)
+                        #eseguo la query per inserire la nuova riga nel database
+                        cursor.execute('INSERT INTO fitbit.sleep_score(user_id, user_name, user_age, sleep_log_entry_id, timestamp, overall_score, composition_score, revitalization_score, duration_score, deep_sleep_in_minutes, resting_heart_rate, restlessness)''VALUES(%s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s)',my_list)
+                        conn.commit()     
+                        
+                except Error as e:
+                            print("Error while connecting to MySQL", e)

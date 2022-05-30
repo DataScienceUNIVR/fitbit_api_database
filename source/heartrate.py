@@ -20,6 +20,7 @@ import fitbit
 import pandas as pd 
 pd.options.display.max_rows = 999
 import datetime
+import credentials
 
 
 
@@ -29,8 +30,8 @@ if __name__ == "__getheartrate__":
     pass
 
 def getheartrate(start_date , end_date) :
-    CLIENT_ID='2389G5'
-    CLIENT_SECRET='636c18786967602847f7396da3456f41'
+    CLIENT_ID=credentials.CLIENT_ID
+    CLIENT_SECRET=credentials.CLIENT_SECRET
     count = 0
 
     def daterange(start_date, end_date):
@@ -89,5 +90,3 @@ def getheartrate(start_date , end_date) :
     f.close()
 
 #--------------------------------------------------------------------------------------------
-
-#getheartrate(start_date , end_date)

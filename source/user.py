@@ -13,17 +13,28 @@ from datetime import timedelta, date
 # This is a python file you need to have in the same directory as your code so you can import it
 import gather_keys_oauth2 as Oauth2
 import fitbit
-import pandas as pd 
+import pandas as pd
+
+from credentials import getCredentials 
 pd.options.display.max_rows = 999
 import datetime
+import credentials
 
 
 if __name__ == "__getuser__":
     pass
 
 def getuser() :
-    CLIENT_ID='2389G5'
-    CLIENT_SECRET='636c18786967602847f7396da3456f41'
+    #CLIENT_ID='2389G5'
+    #CLIENT_SECRET='636c18786967602847f7396da3456f41'
+
+    #getCredentials()
+
+    print(credentials.CLIENT_ID)
+    print(credentials.CLIENT_SECRET)
+
+    CLIENT_ID=credentials.CLIENT_ID
+    CLIENT_SECRET=credentials.CLIENT_SECRET
 
     def daterange(start_date, end_date):
         for n in range(int ((end_date - start_date).days)):
@@ -84,3 +95,6 @@ def getuser() :
    
     return list_user
     #ritorno le informazioni di user e eta e id;
+
+
+getuser()

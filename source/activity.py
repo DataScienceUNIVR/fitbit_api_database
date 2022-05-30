@@ -8,6 +8,7 @@ import fitbit
 import pandas as pd 
 pd.options.display.max_rows = 999
 import datetime
+import credentials
 
 
 if __name__ == "__getactivity__":
@@ -15,8 +16,8 @@ if __name__ == "__getactivity__":
 
 #function for get all activity data
 def getactivity(start_date , end_date) :
-    CLIENT_ID='2389G5'
-    CLIENT_SECRET='636c18786967602847f7396da3456f41'
+    CLIENT_ID=credentials.CLIENT_ID
+    CLIENT_SECRET=credentials.CLIENT_SECRET
 
     def daterange(start_date, end_date):
         start = start_date
