@@ -32,12 +32,13 @@ the database consists of 5 tables:
 
 user_id, user_name e user age are common in all tables
 
+### hearthrate table
 ![image](https://user-images.githubusercontent.com/70893659/169274077-604593aa-2a72-4ad5-8501-cef3966f9100.png)
 calories - The top level time series for calories burned inclusive of BMR, tracked activity, and manually logged activities.
 caloriesBMR - Value includes only BMR calories.
 activityCalories - The number of calories burned during the day for periods of time when the user was active above sedentary level. This value is calculated minute by minute for minutes that fall within this criteria. This includes activity burned calories and BMR.
 
-
+### activity table
 ![image](https://user-images.githubusercontent.com/70893659/169274985-0b3d3158-7156-4e7b-b363-3846c2fa0b71.png)
 activities-heart : datetime	Date of the heart rate log.
 activities-heart : value : customHeartRateZone : caloriesOut	Number calories burned with the custom heart rate zone.
@@ -47,6 +48,7 @@ activities-heart : value : customHeartRateZone : minutes	Number minutes withing 
 activities-heart : value : customHeartRateZone : name	Name of the custom heart rate zone.
 activities-heart : value : restingHeartRate	Resting heart rate value for the day. A sleep stage log is required to generate this value. When a classic sleep log is recorded, this value will be missing.
 
+### sleep table 
 ![image](https://user-images.githubusercontent.com/70893659/169275468-991347d9-9c0e-4bdb-bac0-596d3ea62c1d.png)
 sleep : dateOfSleep	The date the sleep log ended.
 sleep : duration	Length of the sleep in milliseconds.
