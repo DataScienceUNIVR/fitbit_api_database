@@ -160,7 +160,7 @@ def getactivity(start_date , end_date) :
     df = pd.DataFrame(dict)
     
     #dictornary to csv 
-    df.to_csv("source/data/activities.csv",index=False)
+    df.to_csv("data/activities.csv",index=False)
 
 
 start_date = datetime.datetime(2022,2,3).date()

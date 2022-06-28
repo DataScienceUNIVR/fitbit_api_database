@@ -93,5 +93,8 @@ def getsleep(start_date , end_date) :
         print(df)
 
         #dictionary to csv
-        df.to_csv("source/data/sleep.csv",index=False)
+        if df.empty :
+            print("non ci sono dati sullo sleep score")
+        else : 
+            df.to_csv("data/sleep.csv",index=False)
 

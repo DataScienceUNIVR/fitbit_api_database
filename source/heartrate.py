@@ -58,7 +58,7 @@ def getheartrate(start_date , end_date) :
     for n in range(int ((end_date - start_date).days)):
         count = count + 1
 
-    f = open('source\data\heart.csv', 'w',  newline='')
+    f = open('data\heart.csv', 'w',  newline='')
     writer = csv.writer(f)
     header = ['dateTime','caloriesOut',"max","min",'minutes',"name","restingHeartRate"]
     writer.writerow(header)

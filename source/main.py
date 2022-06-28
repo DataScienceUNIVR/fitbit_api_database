@@ -10,8 +10,8 @@ from credentials import getCredentials
 
 #path to the csv file of the sleep score
 path = "C:\\Users\\aless\\OneDrive\\Desktop\\Tesi_fitbit\\MyFitbitData\\Massimo\\Sleep\\sleep_score.csv"
-path = input("insert th path to the sleep score csv : ")
-print(path)
+path_to_csv = input("insert th path to the sleep score csv : ")
+print(path_to_csv)
 
 #get credentials from the user
 getCredentials()
@@ -40,7 +40,7 @@ import heartrate
 import date_ranges
 date_ranges = date_ranges.generateDateRange(start_date,end_date)
 list_user = user.getuser()
-heartrate.getheartrate(start_date,end_date)
+
 
 print(date_ranges)
 
@@ -49,7 +49,7 @@ for i in range(len(date_ranges) - 1 ):
     start = datetime.datetime.strptime(date_ranges[i], '%Y-%m-%d')
     end = datetime.datetime.strptime(date_ranges[i+1], '%Y-%m-%d')
     activity.getactivity(start,end)
-    path = "source\data\\activities.csv"
+    path = "data\\activities.csv"
     with open(path, 'r') as file:
         reader = csv.reader(file)
         for row in reader:
@@ -83,16 +83,17 @@ for i in range(len(date_ranges) - 1 ):
                                         PRIMARY KEY (`id`));""")
 
                         #execution of the query
-                        cursor.execute('INSERT INTO fitbit.activity(user_id, user_name,user_age, date, activity_calories, calories, caloriesBMR, distance, minutesSedentary, minutesLightlyActive, minutesFairlyActive, minutesVeryActive, steps)''VALUES(%s , %s , %s , %s , %s , %s, %s , %s , %s, %s , %s , %s, %s)',my_list)
+                        #cursor.execute('INSERT INTO fitbit.activity(user_id, user_name,user_age, date, activity_calories, calories, caloriesBMR, distance, minutesSedentary, minutesLightlyActive, minutesFairlyActive, minutesVeryActive, steps)''VALUES(%s , %s , %s , %s , %s , %s, %s , %s , %s, %s , %s , %s, %s)',my_list)
                         conn.commit()     
                         
             except Error as e:
                             print("Error while connecting to MySQL", e)
+                            
 
 
     #insert sleep data in the database
     sleep.getsleep(start,end)
-    path = "source\data\\sleep.csv"
+    path = "data\\sleep.csv"
     with open(path, 'r') as file:
         reader = csv.reader(file)
         for row in reader:
@@ -129,7 +130,7 @@ for i in range(len(date_ranges) - 1 ):
                                         PRIMARY KEY (`id_sleep`));""")
 
                         #execution of the query
-                        cursor.execute('INSERT INTO fitbit.sleep(user_id, user_name, user_age, date_of_sleep, awakeCount, awakeDuration, awakeningsCount, duration, efficiency, minutesAfterWakeup, minutesAsleep, minutesAwake, minutesToFallAsleep, restlessCount, restlessDuration, timeInBed)''VALUES(%s , %s , %s , %s , %s , %s, %s , %s , %s, %s , %s , %s, %s, %s, %s, %s)',my_list)
+                        #cursor.execute('INSERT INTO fitbit.sleep(user_id, user_name, user_age, date_of_sleep, awakeCount, awakeDuration, awakeningsCount, duration, efficiency, minutesAfterWakeup, minutesAsleep, minutesAwake, minutesToFallAsleep, restlessCount, restlessDuration, timeInBed)''VALUES(%s , %s , %s , %s , %s , %s, %s , %s , %s, %s , %s , %s, %s, %s, %s, %s)',my_list)
                         conn.commit()     
                         
             except Error as e:
@@ -138,7 +139,7 @@ for i in range(len(date_ranges) - 1 ):
 
     #insert heartrate data in the database
     heartrate.getheartrate(start,end)
-    path = "source\data\\heart.csv"
+    path = "data\\heart.csv"
     with open(path, 'r') as file:
         reader = csv.reader(file)
         for row in reader:
@@ -173,16 +174,19 @@ for i in range(len(date_ranges) - 1 ):
                         conn.commit()     
                         
             except Error as e:
-                            print("Error while connecting to MySQL", e)
+                            print("Error while connecting to MySQL hearthrate", e)
+                            break
 
 
 
-path = "C:\\Users\\aless\\OneDrive\\Desktop\\Tesi_fitbit\\MyFitbitData\\Massimo\\Sleep\\sleep_score.csv"
-print(path)
+#path = "C:\\Users\\aless\\OneDrive\\Desktop\\Tesi_fitbit\\MyFitbitData\\Massimo\\Sleep\\sleep_score.csv"
+print(path_to_csv)
 
-if path != "" :
+if path_to_csv != "" :
     #open the csv 
-    with open(path, 'r') as file:
+    path_to_csv = path_to_csv.replace('"', '')
+    path_to_csv = path_to_csv.replace("\\", "\\\\")
+    with open(path_to_csv, 'r') as file:
         reader = csv.reader(file)
         
         for row in reader:
@@ -224,3 +228,5 @@ if path != "" :
                         
                 except Error as e:
                             print("Error while connecting to MySQL", e)
+else:
+    print("il path inserito non è valido")
